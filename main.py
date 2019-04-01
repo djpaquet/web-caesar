@@ -9,13 +9,13 @@ form = """
 <html>
     <head>
         <style>
-                form {{
+        form {{
             background-color: #eee;
             padding: 20px;
             margin: 0 auto;
             width: 540px;
             font: 16px sans-serif;
-            border-radius: 10px
+            border-radius: 10px;
         }}
 
         textarea {{
@@ -27,15 +27,19 @@ form = """
     </head>
     <body>
         <form action="/" method='post'>
-            <label>Rotate by:
-                <input  id='rot' name='rot' type='text' value='0' /></label>
-            <textarea id='text' name='text' type='textarea'>{0}</textarea>
-            <input type='submit'>
+            <label for="rot">Rotate by:
+                <input type='text' name='rot' id="rot" value='0' /></label>
+            <textarea name='text'>{0}</textarea>
+            <input type='submit' value='Encrypt Baby!'>
         </form>
             
     </body>
 </html>
 """
+
+@app.route("/")
+def index():
+    return form.format('')
 
 
 @app.route("/", methods=['POST'])
@@ -49,9 +53,6 @@ def encrypt():
         mess += letter
     return form.format(mess)
 
-@app.route("/")
-def index():
-    return form
 
 
 app.run()
